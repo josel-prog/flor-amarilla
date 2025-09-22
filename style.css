@@ -1,0 +1,81 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  background: #111;
+  position: relative;
+  height: 100vh;
+}
+
+#star-bg {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.yellow-heart {
+  position: absolute;
+  left: 50%; top: 40%;
+  transform: translate(-50%, -50%);
+  font-size: 7em;
+  color: #FFD600;
+  background: none;
+  border: none;
+  cursor: pointer;
+  filter: drop-shadow(0 0 16px #FFD60088);
+  transition: transform 0.2s;
+  z-index: 2;
+}
+.yellow-heart:active {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+#flower-container {
+  position: absolute;
+  left: 50%;
+  bottom: 28vh; /* más arriba para no tocar el texto */
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+.flower-svg {
+  width: 400px;
+  height: 300px;
+  opacity: 0;
+  animation: flower-appear-svg 1.2s cubic-bezier(.42,1.56,.62,.98) forwards;
+  will-change: transform, opacity;
+  margin: 0 auto;
+  pointer-events: none;
+}
+
+@keyframes flower-appear-svg {
+  0% { opacity: 0; transform: scale(0.2) translateY(60px) rotate(-30deg);}
+  60% { opacity: 1; transform: scale(1.1) translateY(-10px) rotate(10deg);}
+  100% { opacity: 1; transform: scale(1) translateY(0) rotate(0deg);}
+}
+
+#phrases {
+  position: fixed;
+  bottom: 4vh;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2em;
+  color: #FFD600;
+  font-family: 'Segoe Script', cursive;
+  text-shadow: 0 2px 8px #FFD60088;
+  z-index: 4;
+  text-align: center;
+  max-width: 90vw;
+  pointer-events: none;
+}
+
+@media (max-width: 600px) {
+  .yellow-heart { font-size: 4em; top: 35%; }
+  #flower-container { bottom: 22vh; }
+  .flower-svg { width: 220px; height: 160px; }
+  #phrases { font-size: 1.2em; bottom: 2vh; }
+}
