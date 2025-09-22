@@ -51,10 +51,10 @@ const frases = [
   "Eres mi sueño hecho realidad",
   "No hay nadie como tú",
   "Quiero estar contigo siempre",
-  "Eres mi niña a la que amo mucho muchoooo",
+  "Eres mi inspiración",
   "Tu amor me hace fuerte",
   "Eres mi felicidad",
-  "Te pienso a cada momento nunca para",
+  "Te pienso a cada momento",
   "Eres mi mundo",
   "Eres mi princesa",
   "Te adoro"
@@ -64,7 +64,48 @@ const frases = [
 const phrasesDiv = document.getElementById('phrases');
 phrasesDiv.textContent = "FELIZ DIA MI NIÑA, TE AMO";
 
-// Animación de flor y frases (solo una vez)
+// Botón de play arriba a la derecha
+const playBtn = document.createElement('button');
+playBtn.textContent = "▶ Escuchar canción";
+playBtn.style.position = "fixed";
+playBtn.style.top = "22px";
+playBtn.style.right = "22px";
+playBtn.style.zIndex = "10";
+playBtn.style.fontSize = "1.1em";
+playBtn.style.background = "#FFD600";
+playBtn.style.color = "#222";
+playBtn.style.border = "none";
+playBtn.style.borderRadius = "12px";
+playBtn.style.padding = "10px 22px";
+playBtn.style.cursor = "pointer";
+playBtn.style.boxShadow = "0 2px 8px #FFD60088";
+document.body.appendChild(playBtn);
+
+playBtn.onclick = function() {
+  // Reemplaza el siguiente enlace por el video que quieras
+  if (!document.getElementById('yt-frame')) {
+    const ytDiv = document.createElement('div');
+    ytDiv.id = 'yt-frame';
+    ytDiv.style.position = "fixed";
+    ytDiv.style.top = "60px";
+    ytDiv.style.right = "22px";
+    ytDiv.style.zIndex = "20";
+    ytDiv.innerHTML = `
+      <iframe width="320" height="180" src="https://www.youtube.com/embed/MHDAt4Ho2Hg?autoplay=1"
+        title="YouTube video player" frameborder="0"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <button id="close-yt" style="
+        position:absolute;top:0;right:0;background:#FFD600;color:#222;border:none;
+        border-radius:8px;padding:4px 12px;cursor:pointer;z-index:21;">✖</button>
+    `;
+    document.body.appendChild(ytDiv);
+    document.getElementById('close-yt').onclick = function() {
+      ytDiv.remove();
+    };
+  }
+};
+
+// Animación de flor y frases (bucle infinito)
 document.getElementById('yellow-heart').onclick = function() {
   this.style.display = 'none';
   useHearts = true;
@@ -89,15 +130,6 @@ document.getElementById('yellow-heart').onclick = function() {
     setTimeout(showPhrase, 1200);
   }
   showPhrase();
-
-  // Forzar reproducción de música en todos los navegadores
-  const audio = document.getElementById('bg-music');
-  audio.volume = 10;
-  audio.play().catch(() => {
-    document.body.addEventListener('click', () => {
-      audio.play();
-    }, { once: true });
-  });
 };
 
 // Música auto-play (puedes cambiar el archivo en index.html)
